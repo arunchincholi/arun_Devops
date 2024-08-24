@@ -1,0 +1,177 @@
+https://github.com/MithunTechnologiesDevOps
+https://github.com/yankils/ansible_for_beginners/blob/master/install_apache_httpd.yml 
+https://github.com/hkhcoder
+
+
+
+
+:::::::::::::::::::::::Jenkins in ubuntu:::::::::::::::::::::::::::::::::::::::::::
+1.   create ec2 instance(t2micro>ubuntuami>all traffic and ssh myip)>select and connect get ssh >copy and paste it in git bash
+        how open git bash= "run vm(ubuntu vm)>devops(username)>Arunksc@12345(passw)>ip addre show(this ip for connecting)
+                            go to gitbash >ssh username@ip("ssh devops@192.168.1.121" this ip from vm ware)"
+
+
+
+ssh path:ssh -i "C:\Users\arunc\Downloads/practice_jenkins1.pem" ubuntu@ec2-13-232-9-21.ap-south-1.compute.amazonaws.com
+sudo su -
+
+2.paste all commands for install jenkins:
+sudo apt update
+
+sudo apt install openjdk-11-jdk -y
+ 
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+                              or
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]   https://pkg.jenkins.io/debian-stable binary/   | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt update
+
+sudo apt-get install jenkins
+
+systemctl status jenkins
+
+id jenkins
+
+systemctl start jenkins
+
+3. copy ip adrres and paste http://publicip:8080>in chrome one command show copy and and paste it in git bash for passwd(like cat /var/lib/jenkins/secrets/initialAdminPassword)insall pluggin(2nd step) uncheck ant and check nodejs>install>complete
+
+4. installing tools maven and jdk
+sudo apt update && sudo apt install openjdk-11-jdk  >ls /usr/lib/jvm >ls /usr/lib/jvm/jdk11>copy and paste in the java home in jenkins
+ manage jenkins>tools>name "OracleJDK11" java_home path:paste it in  "ls /usr/lib/jvm">you will get jdk 11 so "ls /usr/lib/jvm/jdk" then tab>copy and paste it the java_home path
+maven:name as "MAVEN3"  install automatilly no need to specify the path
+
+5.create one freestyle project>mycommans name>execute sheell(configure-build step)>if any >> its create work space (exampe echo "hi this is arun">>myfile.txt  (so o/p it will store on the workspace) after wipe out you yrigger again job then the workspace created once again .
+
+
+
+-----this is mandotory while giving the batch commands------
+"C:\Program Files\Git\bin\bash.exe" "/c/Users/arunc/scrip/hell.sh"     
+this above is nned to add manadtory.s
+
+
+
+::::::::::::::::::::::::::::::::::::SonarQube setup:::::::::::::::::::::::::::::::::::::::::::
+redhat entreprise :(rehat 9hvm >t3 medium)
+yum update
+sudo yum install java-11-openjdk-devel
+java --version
+yum install wget unzip -y
+cd /opt
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.6.1.59531.zip
+unzip sonarqube-9.6.1.59531.zip
+mv sonarqube-9.6.1.59531 soarqube
+useradd sonar
+sudo visudo
+        sonar    ALL=(ALL:ALL) NOPASSWD: ALL
+chown -R sonar:sonar /opt/sonarqube
+chmod -R 755 /opt/SonarQube
+ls -lr
+su - sonar
+cd /opt/sonarqube/bin/linux-x86-64
+./sonar.sh start 
+./sonar.sh status
+
+take public ip:9000(defult port1)   admin/admin defult
+
+
+::::::::::::::::mvn installation:::::::::::::::::::::::::::::::::  https://github.com/codebuddy123   (practice with GitHub )
+amzon linux 2 AMI HVM >t2 micro>
+
+sudo su -
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.zip
+unzip apache-maven-3.9.5-bin.zip
+vi ~/.bash_profile
+   export M2_HOME=/opt/apache-maven-3.9.5
+   export PATH=$PATH:$M2_HOME/bin
+source ~/.bash_profile
+mvn -v
+
+sudo yum install git -y
+git clone https://github.com/codebuddy123/Maven.git
+/root/Maven/mvnapp06
+ls
+change the pom.xml
+
+or 
+ git clone https://github.com/codebuddy123/maven-web-application.git
+cd maven-web-application/
+pom.xml change remove password and in login add the token it will work.
+
+   it will scan the maven projects and send to sonarqube
+ <properties>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <sonar.host.url>http://65.0.182.142:9000/</sonar.host.url>
+                <sonar.login>admin</sonar.login>
+                <sonar.password>Arunksc@12345</sonar.password>
+        </properties>
+
+
+mvn sonar:sonar
+
+
+build success ( see in the SonarQube)
+
+credintail:::::
+squ_545ae733128ba350a0960749f1a3361598b24e8c    token:
+admin
+http://65.0.182.142:9000/
+
+
+
+maven projects includes:
+├── 6.Spring\ Core\ App\ with\ Maven.txt
+├── apache-maven-3.9.5-bin.zip
+├── pom.xml
+├── pom.xml_bkp
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── ashsoft
+│   │               ├── App.java
+│   │               ├── beans
+│   │               │   └── HelloBean.java
+│   │               ├── client
+│   │               │   └── ClientApp.java
+│   │               └── resources
+│   │                   └── applicationContext.xml
+│   └── test
+│       └── java
+│           └── com
+│               └── ashsoft
+│                   └── AppTest.java
+└── target
+    ├── classes
+    │   ├── com
+    │   │   └── ashsoft
+    │   │       ├── App.class
+    │   │       ├── beans
+    │   │       │   └── HelloBean.class
+    │   │       ├── client
+    │   │       │   └── ClientApp.class
+    │   │       └── resources
+    │   │           └── applicationContext.xml
+    │   └── META-INF
+    │       ├── MANIFEST.MF
+    │       └── maven
+    │           └── com.ashsoft
+    │               └── mvnapp06
+    │                   ├── pom.properties
+    │                   └── pom.xml
+    ├── sonar
+    │   └── report-task.txt
+    └── test-classes
+        └── com
+            └── ashsoft
+                └── AppTest.class
+
+
+
+
