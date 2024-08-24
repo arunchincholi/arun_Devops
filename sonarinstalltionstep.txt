@@ -1,0 +1,23 @@
+::::::::::::::::::::::::::::::::::::SonarQube setup:::::::::::::::::::::::::::::::::::::::::::
+redhat entreprise :(rehat 9hvm >t3 medium)
+yum update
+sudo yum install java-11-openjdk-devel
+java --version
+yum install wget unzip -y
+cd /opt
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.6.1.59531.zip
+unzip sonarqube-9.6.1.59531.zip
+mv sonarqube-9.6.1.59531 soarqube
+useradd sonar
+sudo visudo
+        sonar    ALL=(ALL:ALL) NOPASSWD: ALL
+chown -R sonar:sonar /opt/sonarqube
+chmod -R 755 /opt/SonarQube
+ls -lr
+su - sonar
+cd /opt/sonarqube/bin/linux-x86-64
+./sonar.sh start 
+./sonar.sh status
+
+take public ip:9000(defult port1)   admin/admin defult
+
