@@ -1,0 +1,52 @@
+create directory in which folder you want to intilaize the git
+-mkdir -p family/arun 
+- cd  arun
+- git init 
+- ls -la (varifiy git intilaize)
+create some files and folders inside arun folder 
+- unstaged area this is 
+- git add . or single file (after this staging area)
+- git status ( verify)
+- git commit -m "message what you want"  (moved all things to our local repo)
+      set the global configure( *email id should match with GitHub account email & username take it from GitHub or give what you wan*t)
+- git log (verify for committed id) and verify the local repo ".git/logs$ cat HEAD
+connect local to remote repo by git remote add origin  (execute this command(ssh commands not https in which path you initialized the git that directory) and verify cat .git/config
+- git branch -M main   (default its master change it to main)
+- git push -u origin main   (if you get permission denied add ssh key in GitHub) verify connection before pushing by "ssh -T git@github.com"
+connection not happening means do the ssh key configuration and add shh key in GitHub account after that push .
+follow below steps to add SSH key.
+1. ls ~/.ssh   (check public and private is there or not if not generate )
+2.  ssh-keygen -t ed25519 -C "your_email@example.com"   (created public and private)
+3. eval "$(ssh-agent -s)"
+     ssh-add ~/.ssh/id_ed25519   (add ssh key into SSH agent)
+4. cat ~/.ssh/id_ed25519.pub   (it will print the authentication key on CLI note it)
+5. go to ssh in GitHub by "https://github.com/settings/keys"
+       inside SSH add ssh key name and type(authentication) key is (paste what you get o/p from cat ~/.ssh/id_ed25519.pub)
+6. check the SSH connection "ssh -T git@github.com"
+finaly push from local to remote
+
+
+
+
+
+
+mkdir arun
+  603  cd arun
+  604  git init
+  605  pwd
+  606  touch install.txt
+  607  git add .
+  608  git commit -m "added"
+  609  git log --oneline
+  610  git branch -m main
+  611  git branch
+  612  git remote add origin https://github.com/arunchincholi/install.git
+  613  git remote -v
+  614  git push origin main
+  615  history
+
+git config --global user.name "Your Name"
+git config --global user.email "your_email@example.com"
+
+setting>developer setting>token >create token >no expire
+
